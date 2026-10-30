@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAWHY PARTNERS | Global Strategic Advisory & Capital Architecture</title>
+    <style>
+        :root {
+            --bg-dark: #070F16;
+            --card-bg: #0F1D2A;
+            --brand-purple: #9844B4;
+            --brand-green: #3DC41A;
+            --brand-cyan: #5BE7F6;
+            --text-light: #F4F6F9;
+            --text-muted: #8A9CAE;
+            --border: rgba(152, 68, 180, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 15, 22, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 300;
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--brand-green);
+            border-radius: 50%;
+        }
+
+        .tab-navigation {
+            display: flex;
+            overflow-x: auto;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 8%;
+            position: sticky;
+            top: 70px;
+            z-index: 999;
+        }
+
+        .tab-btn {
+            padding: 1.2rem 2rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn:hover {
+            color: #FFF;
+        }
+
+        .tab-btn.active {
+            color: var(--brand-cyan);
+            border-bottom-color: var(--brand-cyan);
+            background: rgba(91, 231, 246, 0.02);
+        }
+
+        .content-panel {
+            display: none;
+            padding: 5rem 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 60vh;
+        }
+
+        .content-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 200;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        h2 span {
+            color: var(--brand-purple);
+        }
+
+        .panel-intro {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 3.5rem;
+            max-width: 800px;
+            border-left: 2px solid var(--brand-cyan);
+            padding-left: 20px;
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .matrix-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.03);
+            padding: 2.5rem;
+            border-top: 3px solid var(--brand-purple);
+            transition: all 0.3s;
+        }
+
+        .matrix-card:hover {
+            transform: translateY(-3px);
+            border-top-color: var(--brand-cyan);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .matrix-card h3 {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #FFF;
+        }
+
+        .sub-list {
+            list-style: none;
+        }
+
+        .sub-list li {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sub-list li::before {
+            content: "▪";
+            color: var(--brand-cyan);
+        }
+
+        .checkout-box {
+            max-width: 550px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        input, select {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.85rem;
+            color: #FFF;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        input:focus {
+            border-color: var(--brand-cyan);
+            outline: none;
+        }
+
+        .method-flex {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .method-card {
+            flex: 1;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .method-card.active {
+            border-color: var(--brand-cyan);
+            background: rgba(91, 231, 246, 0.05);
+            color: #FFF;
+        }
+
+        .btn-submit {
+            background: transparent;
+            color: #FFF;
+            border: 2px solid var(--brand-cyan);
+            padding: 1rem;
+            width: 100%;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--brand-cyan);
+            color: var(--bg-dark);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 8%;
+            background: #040A0F;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-desc {
+            max-width: 500px;
+            text-align: justify;
+        }
+
+        @media (max-width: 768px) {
+            .tab-navigation {
+                padding: 0 1rem;
+            }
+
+            .tab-btn {
+                padding: 1rem 1.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .content-panel {
+                padding: 3rem 1.2rem;
+            }
+
+            footer {
+                padding: 3rem 1.2rem;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo"><span class="logo-dot"></span>DAWHY PARTNERS</a>
+    </header>
+
+    <nav class="tab-navigation">
+        <button class="tab-btn active" onclick="switchTab(event, 'about')">About Us</button>
+        <button class="tab-btn" onclick="switchTab(event, 'themes')">XYZ Themes</button>
+        <button class="tab-btn" onclick="switchTab(event, 'industries')">Industries</button>
+        <button class="tab-btn" onclick="switchTab(event, 'solutions')">Solutions</button>
+        <button class="tab-btn" onclick="switchTab(event, 'careers')">Careers</button>
+        <button class="tab-btn" onclick="switchTab(event, 'settlement')">Settlement Portal</button>
+    </nav>
+
+    <main>
+        <section id="about" class="content-panel active">
+            <h2>Corporate <span>Manifesto & Governance</span></h2>
+            <p class="panel-intro">Architecting operational models resilient to cross-border regulatory movements.</p>
+
+            <div class="matrix-grid">
+                <div class="matrix-card">
+                    <h3>1.1. Who We Are</h3>
+                    <ul class="sub-list">
+                        <li>Our People</li>
+                        <li>Our Mission, Vision & Values</li>
+                        <li>Our Drive</li>
+                        <li>Ethical Governance</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>1.2. Our Responsibilities</h3>
+                    <ul class="sub-list">
+                        <li>Social Impact Structures</li>
+                        <li>Environmental Sustainability</li>
+                        <li>Economic Corridor Contribution</li>
+                        <li>Strategic Integration Merits</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>1.3. How We Work</h3>
+                    <ul class="sub-list">
+                        <li>Strategic Partnerships</li>
+                        <li>Client Modelling Frameworks</li>
+                        <li>Continuous Learning & R&D</li>
+                        <li>Media, Press & Corporate Blog</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="themes" class="content-panel">
+            <h2>Thought Leadership <span>Channels</span></h2>
+            <p class="panel-intro">Publishing data-driven blueprints governing systemic change.</p>
+
+            <div class="matrix-grid">
+                <div class="matrix-card">
+                    <h3>2.1. Media Vectors</h3>
+                    <ul class="sub-list">
+                        <li>XYZ Technical Articles</li>
+                        <li>XYZ Executive Newsletter</li>
+                        <li>XYZ Monthly Bytes Insights</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>2.2. Strategic Frameworks</h3>
+                    <ul class="sub-list">
+                        <li>XYZ Change Blueprint</li>
+                        <li>Track Record & Global Success Stories</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="industries" class="content-panel">
+            <h2>Target Industry <span>Sectors</span></h2>
+            <p class="panel-intro">Deploying sector-specific technical compliance systems across the global corridor.</p>
+
+            <div class="matrix-grid">
+                <div class="matrix-card">
+                    <h3>Consumer & Retail</h3>
+                    <ul class="sub-list">
+                        <li>FMCG Operational Scales</li>
+                        <li>Retail & E-commerce Hubs</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>Heavy Industry & Energy</h3>
+                    <ul class="sub-list">
+                        <li>Industrial Manufacturing</li>
+                        <li>Energy, Petroleum, Oil & Gas</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>Logistics & Infrastructure</h3>
+                    <ul class="sub-list">
+                        <li>Transport Strategy</li>
+                        <li>Infrastructure & Real Estate Assets</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>Public Sector & Civil Society</h3>
+                    <ul class="sub-list">
+                        <li>Government Systems</li>
+                        <li>Education & Non-Profits (NPOs)</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>Health & Media</h3>
+                    <ul class="sub-list">
+                        <li>Healthcare & Life Sciences</li>
+                        <li>Digital Media & Commerce</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="solutions" class="content-panel">
+            <h2>Solutions <span>Ecosystem</span></h2>
+            <p class="panel-intro">Deep technical capabilities built for modern regulated markets.</p>
+
+            <div class="matrix-grid">
+                <div class="matrix-card">
+                    <h3>4.1. Strategy & Transformation</h3>
+                    <ul class="sub-list">
+                        <li>Digital Transformation</li>
+                        <li>Tech Roadmaps & IT Scaling</li>
+                        <li>Business-IT Alignment</li>
+                        <li>Legacy System Modernisation</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>4.2. Data, AI & Automation</h3>
+                    <ul class="sub-list">
+                        <li>Data Strategy & Automation</li>
+                        <li>Automated FR Tools</li>
+                        <li>Predictive Retail Platforms</li>
+                        <li>Generative AI Governance</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>4.3. Cloud & Infrastructure</h3>
+                    <ul class="sub-list">
+                        <li>Cloud Optimisation Pipelines</li>
+                        <li>IoT Device System Integration</li>
+                        <li>Enterprise Architecture Design</li>
+                        <li>FinOps & Cost Management</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>4.4. Risk & RegTech</h3>
+                    <ul class="sub-list">
+                        <li>Risk Analysis Matrix</li>
+                        <li>Privacy & Patient Data Protection</li>
+                        <li>Corporate Governance Controls</li>
+                        <li>RegTech Compliance Integration</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>4.5. Financial Advisory</h3>
+                    <ul class="sub-list">
+                        <li>Technical Due Diligence</li>
+                        <li>Operational Cost Audits</li>
+                        <li>M&A Technical Evaluation</li>
+                        <li>IT Asset Valuation Protocols</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>4.6. Operations & Logistics</h3>
+                    <ul class="sub-list">
+                        <li>Supply Chain Tracking</li>
+                        <li>OP Analysis Models</li>
+                        <li>Smart Warehouse Systems</li>
+                        <li>Business Process Re-engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="careers" class="content-panel">
+            <h2>Human Capital <span>& Culture</span></h2>
+            <p class="panel-intro">Join our elite distributed operational consulting teams.</p>
+
+            <div class="matrix-grid">
+                <div class="matrix-card">
+                    <h3>5.1. Life at DAWHY</h3>
+                    <ul class="sub-list">
+                        <li>Culture & Core Values</li>
+                        <li>Diversity & Global Inclusion</li>
+                        <li>Team Benefits & Perks Matrix</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>5.2. Opportunities</h3>
+                    <ul class="sub-list">
+                        <li>Search Open Roles</li>
+                        <li>Intern & Graduate Pipelines</li>
+                        <li>Executive & Experienced Hiring</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h3>5.3. Hiring Process</h3>
+                    <ul class="sub-list">
+                        <li>Recruitment Flow</li>
+                        <li>Interview Preparation Tips</li>
+                        <li>Frequently Asked Questions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="settlement" class="content-panel">
+            <h2>Secure Retainer <span>Settlement Portal</span></h2>
+            <p class="panel-intro">Direct API access to regional and global clearing networks.</p>
+
+            <div class="checkout-box">
+                <div class="method-flex">
+                    <div id="card-mpesa" class="method-card active" onclick="setMethod('mpesa')">
+                        🇰🇪 M-Pesa Express
+                    </div>
+                    <div id="card-payoneer" class="method-card" onclick="setMethod('payoneer')">
+                        🌐 Payoneer Global
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientRef">Customer Mobile or Reference</label>
+                    <input id="clientRef" type="text" placeholder="Enter mobile number or client ref" />
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Settlement Capital Volume</label>
+                    <input id="amount" type="number" placeholder="Enter amount" />
+                </div>
+
+                <button class="btn-submit" onclick="executeSecurePush()">Initialize Encrypted Gateway</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-brand">
+            <strong>DAWHY PARTNERS</strong>
+        </div>
+
+        <div class="footer-desc">
+            Architecting certainty in global multi-jurisdictional trade corridors.
+        </div>
+
+        <div>
+            © 2026 DAWHY PARTNERS. Global operations, RegTech automation protocols, and technical due diligence modules map securely across EMEA infrastructure channels via serverless architecture.
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(evt, tabId) {
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const targetPanel = document.getElementById(tabId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+
+            evt.currentTarget.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        let activePaymentMethod = 'mpesa';
+
+        function setMethod(method) {
+            activePaymentMethod = method;
+
+            const mpesaCard = document.getElementById('card-mpesa');
+            const payoneerCard = document.getElementById('card-payoneer');
+
+            if (mpesaCard) {
+                mpesaCard.classList.toggle('active', method === 'mpesa');
+            }
+
+            if (payoneerCard) {
+                payoneerCard.classList.toggle('active', method === 'payoneer');
+            }
+        }
+
+        function executeSecurePush() {
+            const phoneInput = document.getElementById('clientRef').value;
+            const amountInput = document.getElementById('amount').value;
+
+            if (!phoneInput || !amountInput) {
+                return alert('Execution aborted: Parameters missing.');
+            }
+
+            alert('Routing transactional token pipeline dynamically...');
+        }
+    </script>
+</body>
+</html>
